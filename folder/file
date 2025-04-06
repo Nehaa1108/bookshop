@@ -1,0 +1,81 @@
+download mysql workbench
+set password
+create database
+create table-->add all column ,type 
+
+create folder in vscode 
+backend 
+frontend
+
+
+ppackage.json--->
+after main
+ "type":"module",
+ after test--->
+ "start":"nodemon index.js"
+
+
+
+in backend install
+npm init -y
+npm i express mysql2 nodemon
+import mysql from 'mysql2'
+create file in backend root
+index.js
+import express from "express"
+const app = express()
+
+
+
+
+
+
+
+import mysql2 from "mysql2"
+const db = mysql.createConnection({
+  host:"localhost",
+  user:"root",
+  password:"Mysql@1108",
+  database:"bookshop",
+
+})
+
+app.get("/",(req,res)=>
+{
+  res.json("hey, this is backend ")
+})
+
+
+
+app.get("/books",(req,res)=>
+  {
+ const da= "select * from shop_book"
+ db.query(da,(err,data)=>
+{
+  if(err)
+    return res.json(err)
+  return res.json(data)
+})
+  })
+
+app.post("/books",(req,res)=>
+{
+  const da = "INSERT INTO books (`title` , `desc`, `cover` ) VALUES (?)"
+  const values = ["title from backend", "desc from backend", "cover picture from backend"]
+
+  db.query(da,[values],(err,data)=>
+  {
+    if(err)
+      return res.json(err)
+    return res.json(data)
+  })
+})
+
+app.listen(8800,()=>
+{
+  console.log("connected to beckend..")
+})
+
+
+
+
