@@ -11,10 +11,9 @@ const db = mysql.createConnection({
   database:"bookshop",
 
 })
+app.use(express.json())
 
-// if there is a auth pproblem
 
-// ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Mysql@1108'
 
 app.get("/",(req,res)=>
 {
@@ -35,14 +34,14 @@ app.get("/books",(req,res)=>
 
 app.post("/books",(req,res)=>
 {
-  const da = "INSERT INTO books (`title` , `desc`, `cover` ) VALUES (?)"
-  const values = ["title from backend", "desc from backend", "cover picture from backend"]
+  const da = "INSERT INTO books (`title` , `desc`, `cover`,`price` ) VALUES (?)"
+  const values = ["title from backend", "desc from backend", "cover picture from backend","price"]
 
   db.query(da,[values],(err,data)=>
   {
     if(err)
       return res.json(err)
-    return res.json(data)
+    return res.json(data,"books successfully...")
   })
 })
 
